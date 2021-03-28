@@ -22,6 +22,7 @@ type
   protected
     procedure DoClose(var Action: TCloseAction); override;
     procedure DoShow; override;
+    procedure InitTheming(aForm: TForm);
   public
     { Public-Deklarationen }
     constructor Create(AOwner: TComponent); override;
@@ -33,8 +34,12 @@ var
 
 implementation
 
+{$IF CompilerVersion >= 34} // Delphi 10.4 and up
+{$DEFINE IDE_THEMING}
+{$ENDIF}
+
 uses
-  HtHint;
+  HtHint{$IFDEF IDE_THEMING}, ToolsAPI{$ENDIF};
 
 {$R *.dfm}
 
@@ -130,6 +135,26 @@ begin
   if Self.Font.Name <> 'Tahoma' then
     SetControlFonts(Self);
 end;
+
+procedure TFormBase.InitTheming(aForm: TForm);
+{$IFDEF IDE_THEMING}
+var
+  ITS : IOTAIDEThemingServices;
+begin
+  if Supports(BorlandIDEServices, IOTAIDEThemingServices, ITS) then
+  begin
+    if ITS.IDEThemingEnabled then
+    begin
+      ITS.RegisterFormClass(TCustomFormClass(aForm.ClassType));
+      ITS.ApplyTheme(aForm);
+    end;
+  end;
+end;
+{$ELSE}
+begin
+  // no nothing.
+end;
+{$ENDIF}
 
 function TFormBase.ShowModal: Integer;
 var

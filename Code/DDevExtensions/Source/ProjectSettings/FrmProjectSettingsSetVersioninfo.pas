@@ -266,6 +266,7 @@ var
   Item: TListItem;
   Project: IOTAProject;
 begin
+  InitTheming(Self);
   LoadSettings;
 
   lvwProjects.Items.BeginUpdate;
