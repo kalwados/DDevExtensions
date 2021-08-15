@@ -494,6 +494,9 @@ begin
     begin
       X := Form.ScreenToClient(pnErrors.ClientToScreen(Point(0, 0))).X;
       Y := Form.ScreenToClient(TotalLines.ClientToScreen(Point(TotalLines.Top, 0))).Y;
+      {$IF CompilerVersion >= 35}
+      FProgressBar.ScaleForPPI(Form.CurrentPPI);
+      {$IFEND}
       FProgressBar.SetBounds(X, Y + 2, pnErrors.Width, 7);
     end
     else // Fallback
