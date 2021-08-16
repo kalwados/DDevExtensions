@@ -95,10 +95,13 @@ begin
   pnlDescription.Color := clBtnFace;
   pnlDescription.ParentBackground := True;
   {$ENDIF COMPILER7_UP}
+  ScaleForPPI(Application.MainForm.CurrentPPI);
+  Self.Font.Assign(Screen.MessageFont);
 end;
 
 procedure TFrameBase.SetTitle(const ACaption: string);
 begin
+  lblCaption.Font.Style := [fsBold];
   lblCaption.Caption := ACaption;
 end;
 

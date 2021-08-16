@@ -4,6 +4,7 @@ object FrameBase: TFrameBase
   Width = 320
   Height = 240
   TabOrder = 0
+  PixelsPerInch = 96
   object pnlClient: TPanel
     Left = 0
     Top = 49
@@ -31,23 +32,18 @@ object FrameBase: TFrameBase
       Align = alBottom
     end
     object lblDescription: TLabel
-      Left = 16
-      Top = 24
-      Width = 63
-      Height = 13
+      Left = 8
+      Top = 22
+      Width = 93
+      Height = 20
       Caption = 'lblDescription'
     end
     object lblCaption: TLabel
-      Left = 16
-      Top = 8
-      Width = 56
-      Height = 13
+      Left = 8
+      Top = 0
+      Width = 69
+      Height = 20
       Caption = 'lblCaption'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Style = [fsBold]
-      ParentFont = False
     end
   end
 end
